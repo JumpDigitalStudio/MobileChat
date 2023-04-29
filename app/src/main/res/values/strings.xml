@@ -1,7 +1,43 @@
 <resources>
+    <!--  Common text  -->
     <string name="app_name">ChatAndroidApp</string>
     <string name="title_activity_main_navigation">MainNavigationActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!--  Login activity text -->
+    <string name="login_title">Welcome back</string>
+    <string name="login_description">We happy to see you again. To see your account, you should log in first.</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_title_reg">Don`t have an account?</string>
+    <string name="login_link_reg">Sign up</string>
+
+    <!--  Registration activity text -->
+    <string name="reg_title">Create New Account</string>
+    <string name="reg_description">To create your account, please fill in the registration form below.</string>
+    <string name="reg_name">Name</string>
+    <string name="reg_email">Email</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_button">Sign up</string>
+    <string name="reg_title_login">Have an account?</string>
+    <string name="reg_link_login">Sign in</string>
+
+    <!--  Main activity text -->
+    <string name="chats_title">Chats</string>
+    <string name="chats_button_hint">TODO</string>
+    <string name="chats_button_logout">Logout</string>
+
+    <!--  New chat activity text -->
+    <string name="new_title">Create new chat</string>
+    <string name="new_description">Select a user from the contact list or enter Email</string>
+    <string name="new_email">User Email</string>
+    <string name="new_button">Create chat</string>
+
+    <!--  Chat activity text -->
+    <string name="chat_title">Back</string>
+    <string name="chat_message">Message...</string>
+    <string name="chat_button">Send</string>
 </resources>

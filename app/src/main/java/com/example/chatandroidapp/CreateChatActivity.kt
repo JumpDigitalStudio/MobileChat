@@ -52,10 +52,9 @@ class CreateChatActivity : AppCompatActivity() {
         }
 
 
-        binding.button3.setOnClickListener {
-            val email = binding.editTextTextEmailAddress2.text.toString()
+        binding.buttonSubmit.setOnClickListener {
+            val email = binding.editMail.text.toString()
             createChat(userInfoRefCollections, email)
-
         }
     }
 
@@ -93,7 +92,6 @@ class CreateChatActivity : AppCompatActivity() {
                         collections.document(companion.id).set(companion).await()
                         collections.document(user.id).set(user).await()
                         goToChat(chat.id)
-
                     }
 
                 } catch (e: Exception) {
@@ -103,11 +101,9 @@ class CreateChatActivity : AppCompatActivity() {
 
         }
     }
-
     private suspend fun showToast(message: String) = withContext(Dispatchers.Main) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
-
     private fun checkChatExist(
         chatsId: MutableSet<String>,
         chatsId2: MutableSet<String>
@@ -122,7 +118,6 @@ class CreateChatActivity : AppCompatActivity() {
         }
         return false
     }
-
     private suspend fun goToChat(id: String) = withContext(Dispatchers.Main) {
         val intent = Intent(applicationContext, ChatActivity::class.java)
         intent.putExtra("id", id)

@@ -31,17 +31,20 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        progressBar = binding?.progressBar2!!
+        progressBar = binding?.loadingBar!!
         progressBar.visibility = View.INVISIBLE
 
-        binding?.button?.setOnClickListener {
+        binding?.buttonSubmit?.setOnClickListener {
 
-            val email = binding?.editTextTextEmailAddress?.text.toString()
-            val password = binding?.editTextTextPassword?.text.toString()
-            val name = binding?.editTextTextPersonName?.text.toString()
+            val email = binding?.editMail?.text.toString()
+            val password = binding?.editPassword?.text.toString()
+            val name = binding?.editName?.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()){
+
                 it.visibility = View.INVISIBLE
                 progressBar.visibility = View.VISIBLE
+                binding?.buttonSubmit?.visibility = View.INVISIBLE
+
                 lifecycleScope.launch {
                     withContext(Dispatchers.Main) {
                         try {
@@ -55,6 +58,8 @@ class RegistrationActivity : AppCompatActivity() {
                         } catch (e: Exception) {
                             it.visibility = View.VISIBLE
                             progressBar.visibility = View.INVISIBLE
+                            binding?.buttonSubmit?.visibility = View.VISIBLE
+
                             showToast(e.message.toString())
                         }
                     }
@@ -64,29 +69,24 @@ class RegistrationActivity : AppCompatActivity() {
             else{
                 showToast("Field is empty")
             }
-
+        }
+        binding?.linkSign?.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
-
-
 
     private suspend fun registration(email: String, password: String) = withContext(Dispatchers.IO){
         auth.createUserWithEmailAndPassword(email, password).await().user!!
     }
-
-
     private fun showToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
-
-
     private suspend fun updateProfile(name: String) = withContext(Dispatchers.IO) {
         auth.currentUser!!.updateProfile(userProfileChangeRequest {
             displayName = name
             photoUri = Uri.EMPTY
         })
     }
-
     private suspend fun createUserInfo(id: String, email: String, name: String) =
         withContext(Dispatchers.IO) {
             val docRef = fireStore.collection("user-info").document(id)
@@ -94,8 +94,6 @@ class RegistrationActivity : AppCompatActivity() {
             userInfo.chats["share-chat"] = "all"
             docRef.set(userInfo)
         }
-
-
     override fun onDestroy() {
         binding = null
         super.onDestroy()

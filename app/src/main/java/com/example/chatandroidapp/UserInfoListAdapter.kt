@@ -14,29 +14,23 @@ class UserInfoListAdapter : RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>
             field = value
             notifyDataSetChanged()
         }
-
     private var itemClick: (UserInfo) -> Unit = {}
     fun itemClick(listener: (UserInfo) -> Unit) {
         itemClick = listener
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.user = items[position]
         holder.itemView.setOnClickListener {
             itemClick(items[position])
         }
     }
-
     override fun getItemCount(): Int {
         return items.size
     }
-
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var binding = UserItemBinding.bind(view)
 

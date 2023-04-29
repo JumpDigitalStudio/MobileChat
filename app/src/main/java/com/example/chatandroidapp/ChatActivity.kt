@@ -50,33 +50,25 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
-        binding.backView.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
-
-
-
-
     private val childEventListener = object : ChildEventListener {
         override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
             val message = dataSnapshot.getValue<Message>()
             val odlText = binding.outputTextView.text.toString()
-            binding.outputTextView.text = "$odlText '\n'${message.toString()}"
+            binding.outputTextView.text = "$odlText \n\n ${message.toString()}"
         }
-
         override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
 
         }
-
         override fun onChildRemoved(dataSnapshot: DataSnapshot) {
 
         }
-
         override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
 
         }
-
         override fun onCancelled(databaseError: DatabaseError) {
             Toast.makeText(
                 applicationContext, "Failed to load comments.",
@@ -84,7 +76,6 @@ class ChatActivity : AppCompatActivity() {
             ).show()
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         firebaseRef.removeEventListener(childEventListener)

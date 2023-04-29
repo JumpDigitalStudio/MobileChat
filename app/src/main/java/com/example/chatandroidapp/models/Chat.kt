@@ -6,7 +6,6 @@ data class Chat(
     var messages: HashMap<String, Message> = hashMapOf()
 )
 {
-
     fun lastMessage(): Message {
         if (messages.isEmpty()) {
             return Message("", "Create your first chat", "")
